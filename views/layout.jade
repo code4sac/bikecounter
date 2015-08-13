@@ -1,7 +1,11 @@
+// This project uses the Jade template engine.
+// Jade's syntax is an "HTML shorthand".
+// Please see http://jade-lang.com/tutorial/ for an introduction to Jade.
 doctype html
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+    script(src='compiled/app.js?q='+cacheBuster)
+ body
     block content
