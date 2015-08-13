@@ -17,3 +17,6 @@ Desktop.ini
 node_modules
 *.log
 *.gz
+
+# Jetbrains
+.idea
