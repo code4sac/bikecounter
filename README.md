@@ -7,10 +7,9 @@ Mac Terminal/Linux
 The following assumes you have git and npm installed and correctly configured.
 
 1. Clone this repository: `git clone https://github.com/code4sac/bikecounter.git`
-2. Install dependencies: `npm install`
-3. Build the JavaScript: `npm run build:js`
-4. Start the server: `npm start`
-5. [Try it out!](http://localhost:3000)
+2. Install dependencies and build the app: `npm install`
+3. Start the server: `npm start`
+4. [Try it out!](http://localhost:3000)
 
 ## Contributing
 We welcome all contributions, but we ask contributors to follow a few simple guidelines to promote a code base that will be understandable for future contributors.
