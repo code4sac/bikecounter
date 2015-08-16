@@ -1,10 +1,10 @@
 # bikecounter
-A bicycle (and pedestrian) traffic counter, designed in partnership with SABA.
+A bicycle (and pedestrian) traffic counter, designed in partnership with SABA. Please see the [meta](https://github.com/code4sac/bikecounter/tree/master/meta) directory for development related files, such as the project roadmap, mockups, etc.
 
 ## Setup
 Mac Terminal/Linux
 
-The following assumes you have git and npm installed and correctly configured.
+The following assumes you have [git](https://git-scm.com/) and [npm](https://www.npmjs.com/) installed and correctly configured.
 
 1. Clone this repository: `git clone https://github.com/code4sac/bikecounter.git`
 2. Install dependencies and build the app: `npm install`
