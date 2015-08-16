@@ -15,8 +15,9 @@ The following assumes you have git and npm installed and correctly configured.
 We welcome all contributions, but we ask contributors to follow a few simple guidelines to promote a code base that will be understandable for future contributors.
 
 1. Stay as consistent as possible with the style conventions used in the project. We're happy to hear suggestions or corrections on matters of style, and even happier to merge pull requests implementing style improvements.
-2. Please keep commits as small as is reasonable, and please include detailed commit messages.
-3. Commit messages should be a one line summary expressing the purpose of the commit's contents, followed by a more detailed description. These commit messages will be used to create a tutorial for future contributors, so please be as descriptive as time allows
+2. Please check the [Project Roadmap](https://github.com/code4sac/bikecounter/blob/master/roadmap.md) before issuing a feature request, or striking out on your own to implement new functionality.
+3. Please keep commits as small as is reasonable, and please include detailed commit messages.
+4. Commit messages should be a one line summary expressing the purpose of the commit's contents, followed by a more detailed description. These commit messages will be used to create a tutorial for future contributors, so please be as descriptive as time allows
 
 Example commit message:
 ```
