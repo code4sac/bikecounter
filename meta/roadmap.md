@@ -3,15 +3,17 @@ The project roadmap is a series of user stories describing the eventual function
 
 1. As a SABA volunteer, I want to easily record bicycle traffic at a specified intersection so that data is usable by [SABA](http://sacbike.org/) and the [NBPD](http://bikepeddocumentation.org/).
 
-   1.1 I want to record the location of the intersection and the cardinal direction of its streets relative to my observation position.
+   1.1 I want to specify an intersection by its cross streets.
+   
+   1.2 I want to record the weather during my count.
 
-   1.2 I want to record the weather during the time of my count.
-
-   1.3 I want to set a timer that will alert me when the time specified has expired so that I know when I should stop counting.
+   1.3 I want to set a timer that will alert me when time has expired so that I know when I should stop counting.
 
    1.4 I want to record whether a cyclist is male or female.
 
    1.5 I want to record a cyclist's entry and exit points through the specified intersection.
+   
+   1.6 I want to record entry and exit points as a cardinal direction and a street (e.g. `South, 16th St. to North 16th St.` or `West, P St. to North 16th St.`)
 
    1.6 I want to record whether the cyclist was on the street or the sidewalk at both entry and exit points.
 
