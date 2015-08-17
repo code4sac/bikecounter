@@ -17,7 +17,7 @@ This screen is designed to record bike traffic through an intersection. A rider 
 ![Counter Screen - Gender Selected State](https://github.com/code4sac/bikecounter/blob/master/meta/mockups/Counter%20Screen/02%20Counter%20Screen%20-%20Gender%20Chosen%20State.png?raw=true)
 
 ### Two riders, same gender
-If multiple riders travel the same route, the "gender" buttons act as accumulators.
+If multiple riders travel the same route, the "gender buttons" act as accumulators.
 
 ![Counter Screen - Gender Accumulated State](https://github.com/code4sac/bikecounter/blob/master/meta/mockups/Counter%20Screen/03%20Counter%20Screen%20-%20Gender%20Accumulated%20State.png?raw=true)
 
