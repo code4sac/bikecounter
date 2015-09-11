@@ -4,20 +4,20 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build:js": "browserify --debug public/js/init.js -o public/compiled/app.js",
+    "build:js": "browserify --debug public/js/app.js -o public/compiled/app.js",
     "postinstall": "npm run build:js"
   },
   "dependencies": {
-    "backbone": "^1.2.1",
-    "backbone.marionette": "^2.4.2",
     "body-parser": "~1.0.0",
     "browserify": "^11.0.1",
     "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
     "express": "~4.2.0",
     "jade": "~1.3.0",
-    "jquery": "^2.1.4",
     "morgan": "~1.0.0",
     "static-favicon": "~1.0.0"
+  },
+  "devDependencies": {
+    "angular": "^1.4.5"
   }
 }
