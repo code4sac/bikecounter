@@ -1,0 +1,267 @@
+/*  Janice-Horne.com styles */
+/* RESETS */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 14pt;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+/* Remember to define focus styles! */
+:focus {
+
+}
+
+/* End Resets */
+/* IE Hacks*/
+div {zoom:1;height:1%;}
+
+
+html {
+	background-color: white;
+	color:rgb(65,65,65);
+	font-family:helvetica,arial,sans-serif;
+}
+
+body
+{
+}
+
+p
+{
+	margin-bottom:.5em;
+	line-height: 1.2;
+	font-size:100%;
+}
+
+div, p, th, td, li, dd, dl, a
+{
+}
+
+a, .script-link
+{
+	text-decoration:underline;
+	cursor:pointer;
+	color:rgb(65,65,65);
+}
+.no-decoration {
+	text-decoration:none;
+}
+a:hover {}
+
+dt { font-weight: bold; }
+
+ol, li, dl, dt, dd 
+{ 
+	line-height: 1.5em; 
+}
+
+input.num {text-align:right;}
+
+
+table, th, td, tr {
+	border: 1pt #aaa solid;
+	padding: 2pt 6pt;
+	border-collapse: collapse;
+
+}
+table {margin: 10pt auto;}
+th {text-align:center;font-weight:bold;font-size:.8em;}
+td {text-align:left;}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: helvetica, arial, sans-serif;
+	font-weight: bold;
+	text-align: left;
+	background-color: transparent;
+	margin: .125em 0 .05em 0;
+	padding:0;
+	line-height:.8;
+}
+h1 { font-size: 800%; }
+h2 { font-size: 400%; }
+h3 { font-size: 200%; }
+h4 { font-size: 175%; }
+h5 { font-size: 150%; }
+h6 { font-size: 100%; }
+
+img
+{
+	border: 0;
+}
+
+/* clear any floats */
+.clear, .clearer {
+	clear:both;
+}
+
+#contain {
+	width:320px;
+	margin:0;
+}
+
+#streetPattern {
+	margin:1em auto .5em auto;
+	background-image:url(../images/intersection.png);
+	background-repeat:no-repeat;
+	background-color:none;
+	background-size:contain;
+	background-position:center;
+}
+.entry {
+	height:57px;
+	width:57px;
+	line-height:280%;
+	text-align:center;
+	margin:1em auto .5em auto;
+	background-color:#bcf;
+	cursor:pointer;
+}
+
+p#westWay {
+	float:left;
+	margin-left:15%;
+	margin-top:.65em;
+}
+
+p#eastWay {
+	margin-right:15%;
+	margin-top:1.1em;
+}
+
+#travelerList {
+
+}
+.traveler {
+	height:77px;
+	width:57px;
+	float:left;
+	margin-left:16px;
+	cursor:pointer;
+}
+
+
+/* seems that safari at least requires
+that the background positioning and repeat
+directives all be applied together. That is,
+changing the background image resets the repeat 
+and position to default
+*/
+#traveler_1 {
+	background: url(../images/BikeFemale.png);
+	background-repeat:no-repeat;
+	background-position: 0 20px;
+}
+#traveler_2 {
+	background: url(../images/BikeMale.png);
+	background-repeat:no-repeat;
+	background-position: 0 20px;
+}
+#traveler_3 {
+	background: url(../images/BikeFemaleWalk.png);
+	background-repeat:no-repeat;
+	background-position: 0 20px;
+}
+#traveler_4 {
+	background: url(../images/BikeMaleWalk.png);
+	background-repeat:no-repeat;
+	background-position: 0 20px;
+}
+
+.travelerCnt {
+	text-align:center;
+	font-weight:bold;
+	background-color:red;
+	width:100%;
+	display:block;
+	font-size:80%;
+	color:white;
+	border-radius: 5px;
+}
+
+#undoCounts {
+	float:right;
+	text-align:center;
+	width:60px;
+	padding:3px;
+	border:#ddd 1.5pt solid;
+	border-radius:5px;
+	background-color:#eee;
+	cursor:pointer;
+	font-size:80%;
+}
+
+/* Information Form */
+#infoContain {
+	width:200px;
+	margin:30px auto;
+}
+#countInfo p {
+	font-size:.8em;
+}
+#countInfo input {
+	width:100%;
+}
+
+#buttonRow {
+	margin-top:20px;
+	text-align:right;
+}
+#buttonRow input {
+	width:70px;
+}
+
+/* the menu items */
+#modalDiv {
+	display:none;
+	position:absolute;
+	background-color:transparent;
+}
+
+#menuButton {
+	position:absolute;
+	top:5px;
+	left:5px;
+	text-align:center;
+	width:30px;
+	padding:3px;
+	border:#ddd 1.5pt solid;
+	border-radius:5px;
+	background-color:#eee;
+	cursor:pointer;
+}
+
+#menuList ul {
+	display:none;
+	position:absolute;
+	top:5px;
+	left:5px;
+	display:block;
+	background-color:white;
+	border:#ddd 1.5pt solid;
+	border-radius:5px;
+	padding:.5em;
+	cursor:pointer;
+	z-index:850;
+}
+
+#menuList ul li {
+	list-style:none;
+	padding:.5em;
+	font-size:.8em;
+	margin:0;
+	padding:3px;
+	z-index:1000;
+}

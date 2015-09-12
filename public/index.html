@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bike and Walk Web</title>
+		<link rel="icon" type="image/png" href="/images/favoricon.png" >
+		<link rel="SHORTCUT ICON" type="image/vnd.microsoft.icon" href="/images/favricon.ico" >
+		<meta name="viewport" content="width=device-width" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/common.js" ></script>
+
+		<link rel="stylesheet" href="stylesheets/default.css" type="text/css" media="all" >
+		<script type="text/javascript">
+$(document).ready(function() {startUp();});
+		</script>
+	</head>
+	<body>
+		<div id="modalDiv"></div>
+		<div id="contain">
+			<div id="menuContain">
+				<p onclick="showMenu()" id="menuButton">...</p>
+				<div id="menuList">
+					<ul>
+						<li onclick="showCount()">Show Count Page</li>
+						<li onclick="showForm()">Show Form Page</li>
+						<li onclick="submitReport()">Submit Report</li>
+					</ul>
+				</div>
+			</div>
+			<div id="countContain">
+				<p id="undoCounts" >clear</p>
+				<div id="streetPattern">
+					<!-- The traffic counting layout -->
+					<p id="northWay" name="north" class="entry">Enter</p>
+					<p id="westWay" name="west" class="entry">Enter</p>
+					<p id="eastWay" name="east" class="entry">Enter</p>
+					<p id="southWay" name="south" class="entry">Enter</p>
+				</div>
+				<div id="travelerList">
+					<p id="traveler_1" class="traveler" name="BikeFemale">
+						<span id="Cnt_traveler_1" class="travelerCnt"></span>
+					</p>
+					<p id="traveler_2" class="traveler" name="BikeMale">
+						<span id="Cnt_traveler_2" class="travelerCnt"></span>
+					</p>
+					<p id="traveler_3" class="traveler" name="BikeFemaleWalk">
+						<span id="Cnt_traveler_3" class="travelerCnt"></span>
+					</p>
+					<p id="traveler_4" class="traveler" name="BikeMaleWalk">
+						<span id="Cnt_traveler_4" class="travelerCnt"></span>
+					</p>
+				</div>
+			</div>
+			<div id="infoContain">
+				<!-- User and location information -->
+				<form id="countInfo" method="post" action="#" onSubmit="return false">
+					<p>Location Name: <br />
+						<input name="locationName" type="text" value="" /></p>
+					<p>Street running North to South: <br />
+						<input name="NS_streetName" type="text" value="" /></p>
+					<p>Street running East to West: <br />
+						<input name="EW_streetName" type="text" value="" /></p>
+					<p>Your name: <br />
+						<input name="counterName" type="text" value="" /></p>
+					<p>Weather: <select name="weather" >
+						<option disabled="disabled" selected="selected" >Select...</option>
+						<option >Fair</option>
+						<option >Rainy</option>
+						<option >Very cold</option>
+						</select>
+					</p>
+					<p id="buttonRow">
+						<input type="reset" value="Reset">&nbsp;&nbsp;&nbsp;&nbsp;
+						<input id="infoFormSubmit" type="submit" value="Save">
+					</p>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
