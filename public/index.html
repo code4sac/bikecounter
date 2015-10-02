@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,20 +20,37 @@ $(document).ready(function() {startUp();});
 				<p onclick="showMenu()" id="menuButton">...</p>
 				<div id="menuList">
 					<ul>
-						<li onclick="showCount()">Show Count Page</li>
-						<li onclick="showForm()">Show Form Page</li>
+						<li onclick="showCountPage()">Show Count Page</li>
+						<li onclick="showFormPage()">Show Form Page</li>
 						<li onclick="submitReport()">Submit Report</li>
 					</ul>
 				</div>
 			</div>
 			<div id="countContain">
-				<p id="undoCounts" >clear</p>
+				<h1 id="countName">Vallejo &amp; Freeport</h1>
+				<p id="eastWestStreetName"><img class="arrows" src="images/arrows/EastToWest.png" />&nbsp;Vallejo Way&nbsp;<img class="arrows" src="images/arrows/WestToEast.png" /></p>
+				<p id="northSouthStreetName"><img class="arrows" src="images/arrows/EastToWest.png" />&nbsp;Freeport Blvd.&nbsp;<img class="arrows" src="images/arrows/WestToEast.png" /></p>
 				<div id="streetPattern">
 					<!-- The traffic counting layout -->
-					<p id="northWay" name="north" class="entry">Enter</p>
-					<p id="westWay" name="west" class="entry">Enter</p>
-					<p id="eastWay" name="east" class="entry">Enter</p>
-					<p id="southWay" name="south" class="entry">Enter</p>
+					<p id="northWay" >
+						<span id="A3" name="AD" class="entry N_Entry">A3</span><img class="shoulder" src="images/spacer.png" />
+						<span id="A2" name="AC" class="entry N_Entry">A2</span><img class="shoulder" src="images/spacer.png" />
+						<span id="A1" name="AB" class="entry N_Entry">A1</span>
+					</p>
+					<p class="eastWestWay" >
+						<span id="D1" name="DA" class="entry W_Entry">D1</span><img class="intersection" src="images/spacer.png" /><span id="B3" name="BA" class="entry E_Entry">B3</span>
+					</p>                                                                                                                                                 
+					<p class="eastWestWay" >                                                                                                                             
+						<span id="D2" name="DB" class="entry W_Entry">D2</span><img class="intersection" src="images/spacer.png" /><span id="B2" name="BD" class="entry E_Entry">B2</span>
+					</p>                                                                                                                                                 
+					<p class="eastWestWay" >                                                                                                                             
+						<span id="D3" name="DC" class="entry W_Entry">D3</span><img class="intersection" src="images/spacer.png" /><span id="B1" name="BC" class="entry E_Entry">B1</span>
+					</p>
+					<p id="southWay" >
+						<span id="C1" name="CD" class="entry S_Entry">C1</span><img class="shoulder" src="images/spacer.png" />
+						<span id="C2" name="CA" class="entry S_Entry">C2</span><img class="shoulder" src="images/spacer.png" />
+						<span id="C3" name="CB" class="entry S_Entry">C3</span>
+					</p>
 				</div>
 				<div id="travelerList">
 					<p id="traveler_1" class="traveler" name="BikeFemale">
@@ -50,18 +66,22 @@ $(document).ready(function() {startUp();});
 						<span id="Cnt_traveler_4" class="travelerCnt"></span>
 					</p>
 				</div>
+				<p id="undoCounts" class="clearer" >clear</p>
 			</div>
 			<div id="infoContain">
 				<!-- User and location information -->
-				<form id="countInfo" method="post" action="#" onSubmit="return false">
-					<p>Location Name: <br />
-						<input name="locationName" type="text" value="" /></p>
+				<form id="countInfo" method="post" action="#" onSubmit="showCountPage();return false;">
+					<input type="hidden" name="countID" />
+					<p>Count Date &amp; Time: <br />
+						<input name="countDate" type="text" value="Sept. 17. 2015" disabled="disabled"/>
+						<input name="countTime" type="text" value="4:00pm to 6:00pm" disabled="disabled"/>
+					</p>
+					<p>Your Count Location: <br />
+						<input name="locationName" type="text" value="Vallejo & Freeport" disabled="disabled"/></p>
 					<p>Street running North to South: <br />
-						<input name="NS_streetName" type="text" value="" /></p>
+						<input name="NS_streetName" type="text" value="Freeport Blvd" disabled="disabled" /></p>
 					<p>Street running East to West: <br />
-						<input name="EW_streetName" type="text" value="" /></p>
-					<p>Your name: <br />
-						<input name="counterName" type="text" value="" /></p>
+						<input name="EW_streetName" type="text" value="Vallejo Way" disabled="disabled" /></p>
 					<p>Weather: <select name="weather" >
 						<option disabled="disabled" selected="selected" >Select...</option>
 						<option >Fair</option>
@@ -69,12 +89,19 @@ $(document).ready(function() {startUp();});
 						<option >Very cold</option>
 						</select>
 					</p>
+
 					<p id="buttonRow">
 						<input type="reset" value="Reset">&nbsp;&nbsp;&nbsp;&nbsp;
 						<input id="infoFormSubmit" type="submit" value="Save">
 					</p>
 				</form>
 			</div>
+			<div id="dataContain">
+				<p onClick="clearData()">Data:<span id="totalCnt" >&nbsp;&nbsp;&nbsp;Total: <span id="total"></span></span>
+				</p>
+				<pre id="data"></pre>
+			</div>
+			<p id="footer">Bike and Walk</p>
 		</div>
 	</body>
 </html>

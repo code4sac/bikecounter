@@ -1,4 +1,4 @@
-/*  Janice-Horne.com styles */
+/*  Bike And Walk Web App styles */
 /* RESETS */
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -35,19 +35,11 @@ html {
 	font-family:helvetica,arial,sans-serif;
 }
 
-body
-{
-}
-
 p
 {
 	margin-bottom:.5em;
 	line-height: 1.2;
 	font-size:100%;
-}
-
-div, p, th, td, li, dd, dl, a
-{
 }
 
 a, .script-link
@@ -56,9 +48,7 @@ a, .script-link
 	cursor:pointer;
 	color:rgb(65,65,65);
 }
-.no-decoration {
-	text-decoration:none;
-}
+
 a:hover {}
 
 dt { font-weight: bold; }
@@ -68,40 +58,26 @@ ol, li, dl, dt, dd
 	line-height: 1.5em; 
 }
 
-input.num {text-align:right;}
-
-
-table, th, td, tr {
-	border: 1pt #aaa solid;
-	padding: 2pt 6pt;
-	border-collapse: collapse;
-
-}
-table {margin: 10pt auto;}
-th {text-align:center;font-weight:bold;font-size:.8em;}
-td {text-align:left;}
-
 h1, h2, h3, h4, h5, h6 {
 	font-family: helvetica, arial, sans-serif;
 	font-weight: bold;
-	text-align: left;
+	text-align: center;
 	background-color: transparent;
 	margin: .125em 0 .05em 0;
 	padding:0;
 	line-height:.8;
 }
-h1 { font-size: 800%; }
-h2 { font-size: 400%; }
-h3 { font-size: 200%; }
-h4 { font-size: 175%; }
-h5 { font-size: 150%; }
-h6 { font-size: 100%; }
+h1 { font-size: 100%; }
 
 img
 {
 	border: 0;
 }
 
+pre {
+	font-family:courier, monospace;
+	font-size:80%;
+}
 /* clear any floats */
 .clear, .clearer {
 	clear:both;
@@ -113,42 +89,142 @@ img
 }
 
 #streetPattern {
-	margin:1em auto .5em auto;
-	background-image:url(../images/intersection.png);
+	margin:0 auto 0em auto;
+	background-image:url(../images/IntersectionBackground.png);
 	background-repeat:no-repeat;
 	background-color:none;
 	background-size:contain;
 	background-position:center;
 }
 .entry {
-	height:57px;
-	width:57px;
-	line-height:280%;
-	text-align:center;
-	margin:1em auto .5em auto;
-	background-color:#bcf;
 	cursor:pointer;
+	font-size:90%;
 }
 
-p#westWay {
-	float:left;
-	margin-left:15%;
-	margin-top:.65em;
+img.shoulder {
+	width:15px;
+	height:20px;
+}
+img.intersection {
+	width:128px;
+	height:5px;
 }
 
-p#eastWay {
-	margin-right:15%;
-	margin-top:1.1em;
+#totalCnt, #total {
+	font-size:80%;
+	font-weight:bold;
 }
 
-#travelerList {
+p#eastWestStreetName, #northSouthStreetName{
+	font-size:60%;
+	text-align:center;
+	background-color:#eee;
+	width:225px;
+	margin: 6px auto 0 auto;
+	padding-bottom:3px;
+	height:18px;
+	overflow:hidden;
+}
+#northSouthStreetName {
+	-ms-transform: rotate(270deg); /* IE 9 */
+	-webkit-transform: rotate(270deg); /* Safari */
+	transform: rotate(270deg);
+	position:absolute;
+	top:150px;
+	left:-95px;
+	width:230px;
+}
+.arrows {
+	height:15px;
+	width:15px;
+	position:relative;
+	top:3px;
+}
+
+.N_Entry {
+	padding:20px 2px 25px 2px;
+}
+.S_Entry {
+	padding:25px 2px 25px 2px;
+}
+.E_Entry {
+	padding:2px 10px 2px 30px;
+}
+.W_Entry {
+	padding:2px 30px 2px 10px;
+}
+
+p#northWay, p#southWay {
+	text-align:center;
+	padding-top:15px;
+	padding-bottom:15px;
 
 }
+p#southWay {
+	padding-top:22px;
+}
+p.eastWestWay {
+	padding:8px 0;
+	margin:0;
+	text-align:center;
+}
+
+/* directional arrows for lanes */
+#A1 {
+	background:url(../images/arrows/NorthToEast.png) no-repeat bottom;
+	background-size:80%;
+}
+#A2 {
+	background:url(../images/arrows/NorthToSouth.png) no-repeat bottom;
+	background-size:80%;
+}
+#A3 {
+	background:url(../images/arrows/NorthToWest.png) no-repeat bottom;
+	background-size:80%;
+}
+#B1 {
+	background:url(../images/arrows/EastToSouth.png) no-repeat left;
+	background-size:35%;
+}
+#B2 {
+	background:url(../images/arrows/EastToWest.png) no-repeat left;
+	background-size:35%;
+}
+#B3 {
+	background:url(../images/arrows/EastToNorth.png) no-repeat left;
+	background-size:35%;
+}
+#C1 {
+	background:url(../images/arrows/SouthToWest.png) no-repeat top;
+	background-size:80%;
+}
+#C2 {
+	background:url(../images/arrows/SouthToNorth.png) no-repeat top;
+	background-size:80%;
+}
+#C3 {
+	background:url(../images/arrows/SouthToEast.png) no-repeat top;
+	background-size:80%;
+}
+#D1 {
+	background:url(../images/arrows/WestToNorth.png) no-repeat right;
+	background-size:35%;
+}
+#D2 {
+	background:url(../images/arrows/WestToEast.png) no-repeat right;
+	background-size:35%;
+}
+#D3 {
+	background:url(../images/arrows/WestToSouth.png) no-repeat right;
+	background-size:35%;
+}
+
 .traveler {
 	height:77px;
 	width:57px;
 	float:left;
 	margin-left:16px;
+	margin-top:6px;
 	cursor:pointer;
 }
 
@@ -158,6 +234,10 @@ that the background positioning and repeat
 directives all be applied together. That is,
 changing the background image resets the repeat 
 and position to default
+
+In the production version the number and icons
+for each traveler will be provided by the server
+so these elements will be created and decorated in js.
 */
 #traveler_1 {
 	background: url(../images/BikeFemale.png);
@@ -192,9 +272,9 @@ and position to default
 }
 
 #undoCounts {
-	float:right;
 	text-align:center;
 	width:60px;
+	margin:0px 20px 0px auto;
 	padding:3px;
 	border:#ddd 1.5pt solid;
 	border-radius:5px;
@@ -241,6 +321,7 @@ and position to default
 	border-radius:5px;
 	background-color:#eee;
 	cursor:pointer;
+	z-index:200;
 }
 
 #menuList ul {
@@ -264,4 +345,24 @@ and position to default
 	margin:0;
 	padding:3px;
 	z-index:1000;
+}
+
+#footer {
+	height:100px;
+	font-size:80%;
+	color:#666;
+	text-align:center;
+}
+
+#dataContain {
+}
+
+pre#data {
+	overflow:auto;
+	height:300px;
+	width:80%;
+	margin:10px auto;
+	font-size:70%;
+	padding:3px;
+	border: 1px solid #666;
 }

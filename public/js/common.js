@@ -1,15 +1,16 @@
-
-
-// some globals
-var entryLane = "";
-var exitLane = "";
+/*
+ An arbitray upper limit to the possible number
+of travelers we would ever display.
+*/
+var howManyTravelers = 10
 
 function startUp(){
 	setLanes();
 	setTravelers();
 	setUndo();
 	hideMenu();
-	showCount();
+	showCountPage();
+	showData();
 }
 
 function setUndo(){
@@ -17,7 +18,6 @@ function setUndo(){
 }
 
 function undoCounts(){
-	if(savingData()) return false;
 	clearAll();
 }
 
@@ -26,52 +26,12 @@ function setLanes() {
 	$(".entry").click(function(){laneClicked(this);});
 }
 
-function clearLanes() {
-	entryLane = "";
-	exitLane = "";
-	$(".entry").css('background-color','#bcf').text("Entry");
-}
-
 function setTravelers(){
 	$(".traveler").click(function(){travelerClicked(this)});
 	clearTravelers();
 }
 
-function laneClicked(which){
-	if(savingData()) return; // waiting for data upload
-	if(!hasTraveler()) return; // need to click a traveler first
-	var targetName = $("#"+which.id).attr("name")
-	if(entryLane == "") {
-		// this is the entry
-		// first change all the entry point titles...
-		$(".entry").text("")
-		$("#"+which.id).css('background-color','#3f3').text("Entry");
-		entryLane = targetName;
-	} else {
-		if(entryLane == targetName) return; /// can't exit the entry
-		// this is the exit
-		$("#"+which.id).css('background-color','red').text("Exit");
-		exitLane = targetName;
-		// record the trip...
-		// compile each traveler type count
-		for(var i = 1; i < 5; i++){
-			var cnt = $("#Cnt_traveler_" + i).text();
-			if (cnt + 0 > 0){
-				var y = "Entry = " + entryLane + "\rExit = "+exitLane + "\rTraveler = "+ $("#traveler_"+i).attr("name") + "\rCount = "+cnt;
-				//alert(y);
-			}
-		}
-		setTimeout("clearAll()", 1500) // feedback delay
-	}
-}
-
-function travelerClicked(which){
-	if(savingData()) return; // waiting for data upload
-	var y = "#Cnt_"+which.id;
-	var cnt = $(y).text();
-	cnt++;
-	$(y).text(cnt).show();
-}
+// Traveler and Lanes UI
 
 function clearTravelers() {	$(".travelerCnt").text("0").hide();}
 
@@ -80,24 +40,153 @@ function clearAll() {
 	clearLanes();
 }
 
-function savingData() {
-	if(entryLane != "" && exitLane != "") {
-		return true; // waiting for data upload
-	}else{
-		return false;
+function hasTraveler() {
+	// test that there is at least one traveler counted
+	for(var i = 1; i <= howManyTravelers; i++){
+		var cnt = $("#Cnt_traveler_" + i).text();
+		if (cnt + 0 > 0){return true;}
+	} // end for
+
+	return false; // no counts
+
+}
+
+function clearLanes() {
+	$(".entry").css('background-color','#bcf');
+}
+
+function travelerClicked(which){
+	var y = "#Cnt_"+which.id;
+	var cnt = $(y).text();
+	cnt++;
+	$(y).text(cnt).show();
+}
+
+// end Traveler and Lanes UI
+
+function laneClicked(which){
+	if(!hasTraveler()) return; // need to click a traveler first
+	var entryLane = which.id;
+	// change the lane color...
+	$("#"+which.id).css('background-color','#3f3');
+	// record the trip...
+
+	// get the locally stored data
+	var data = getData();
+
+	// compile each traveler type count as tab/return delimited text
+	// Arbtrarily limit the number of travelers to check at 10...
+	for(var i = 1; i <= howManyTravelers; i++){
+		var cnt = $("#Cnt_traveler_" + i).text();
+		if (cnt + 0 > 0){
+			var y = entryLane + "\t"+ $("#traveler_"+i).attr("name") + "\t"+cnt + "\n";
+			//alert(y);
+			data = data + y;
+		}
+	}
+
+	// saveData writes data to sessionStorage
+	// use webworker to upload data to host when connection is available
+	saveData(data);
+	showData();
+	setTimeout("clearAll()", 500) // feedback delay
+}
+
+// Data Handling...
+function saveData(data){
+	if(hasSessionStorage()) {
+		sessionStorage.data = data;
+	} else {
+		// Sorry! No Web Storage support..
+		uploadData(data);
 	}
 }
 
-function hasTraveler() {
-	// test that there is at least one traveler counted
-	var cnt;
-	for(var i=1; i < 5; ++i){
-		cnt = $("#Cnt_traveler_" + i ).text();
-		cnt++;
-		if(cnt > 1) return true;
+function readData(){
+	if(hasSessionStorage()) {
+		return sessionStorage.data;
+	} else {
+		// Sorry! No Web Storage support..
+		return "";
 	}
-	return false;
 }
+
+function getData() {
+	// return the current session data
+	var data = "";
+	// try to get it from sessionStorage
+	data = readData()
+	// if still empty? add the header row
+	if (!data){data = "Lane\tTraveler\tCount\n";} 
+
+	return data;
+}
+
+function showData() {
+	var data = getData();
+	// display the session data in the data div
+	$("pre#data").text(data);
+	showTotal(data);
+}
+
+function showTotal(data) {
+	var theTotal = 0;
+	// loop through the lines of data and add to theTotal
+	var countLines = data.split("\n");
+	var searchString = /\t\d/;
+	if(countLines.length > 1){
+		for(var i = 1;i< countLines.length; i++) {
+			var pos = countLines[i].search(searchString);
+			if(pos >= 0) {
+				var n = Number(countLines[i].substr(pos+1));
+				if(n) theTotal = theTotal + n ;
+			}
+		}
+	}
+	if(theTotal > 0){
+		$("#total").text(theTotal);
+	}else{
+		$("#total").text("0");
+	}
+}
+
+function hasSessionStorage() {
+	if(typeof(sessionStorage) !== "undefined") {
+		// Storage is available
+		return true;
+	} else {
+		return false
+	}	
+}
+
+function uploadData() {
+	// just a stub for now
+
+	/* 
+	if sessionStorage and webWorkers are available,
+	accumulate the data and upload it at intervals to 
+	reduce network use on client device. Also allows
+	data to be accumulated and uploaded when a connection
+	is available in the case where the user does not
+	have connection in the counting location.
+
+	if storage is not available the data must be uploaded
+	immediately. Alert the user if there is no connection.
+	In that case they won't be able to use the app for counting
+	without a connection.
+	*/
+
+}
+
+function clearData() {
+	if(hasSessionStorage()) {
+		sessionStorage.removeItem("data");
+		showData(); // refresh the data list
+	}
+	// else do nothing...
+}
+
+// End Data handling
 
 /* handle the menu items */
 function showMenu(){
@@ -110,12 +199,12 @@ function hideMenu() {
 	$("#modalDiv").unbind("click");
 	$("#menuList").hide();
 }
-function showCount(){
+function showCountPage(){
 	$("#countContain").show();
 	$("#infoContain").hide();
 	hideMenu();
 }
-function showForm(){
+function showFormPage(){
 	$("#countContain").hide();
 	$("#infoContain").show();
 	hideMenu();
@@ -143,15 +232,4 @@ function setModal(objectID,modalState) {
 		$(objectID).css("height",docHeight).css("width",docWidth).hide();
 	}
 }
-/* seems to work with document, but not on individule elements
 
-var doubleTouchStartTimestamp = 0;
-$(".traveler").bind("touchstart", function (event) {
-    var now = +(new Date());
-    if (doubleTouchStartTimestamp + 500 > now) {
-        event.preventDefault();
-    }
-    doubleTouchStartTimestamp = now;
-});
-
-*/
