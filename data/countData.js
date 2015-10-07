@@ -11,23 +11,27 @@ module.exports = [
 		longitude: -121.4889744,
 		travelers: [
 			{
-				id: 'BikeFemale',
-				icon_url: 'images/BikeFemale.png',
+				id: 1,
+				name: 'BikeFemale',
+				icon_url: 'http://bikeandwalk.org/v2.1/images/BikeFemale.png',
 				order: 1
 			},
 			{
-				id: 'BikeMale',
-				icon_url: 'images/BikeMale.png',
+				id: 2,
+				name: 'BikeMale',
+				icon_url: 'http://bikeandwalk.org/v2.1/images/BikeFemale.pngimages/BikeMale.png',
 				order: 2
 			},
 			{
-				id: 'BikeFemaleWalk',
-				icon_url: 'images/BikeFemaleWalk.png',
+				id: 3,
+				name: 'BikeFemaleWalk',
+				icon_url: 'http://bikeandwalk.org/v2.1/images/BikeFemale.pngimages/BikeFemaleWalk.png',
 				order: 3
 			},
 			{
-				id: 'BikeMaleWalk',
-				icon_url: 'images/BikeMaleWalk.png',
+				id: 4,
+				name: 'BikeMaleWalk',
+				icon_url: 'http://bikeandwalk.org/v2.1/images/BikeFemale.pngimages/BikeMaleWalk.png',
 				order: 4
 			}
 		]
