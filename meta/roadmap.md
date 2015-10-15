@@ -1,6 +1,8 @@
 # Project Roadmap
 The project roadmap is a series of user stories describing the eventual functionality of the application. User stories will be marked with italics when they are added to the backlog, and with a strikethrough when they are implemented. Pull requests are happily accepted on this file, but they should reflect discussions about the roadmap in the issues queue.
 
+[Bill's documentation](http://bikeandwalk.org/docs/)
+
 1. As a SABA volunteer, I want to easily record bicycle traffic at a specified intersection so that data is usable by [SABA](http://sacbike.org/) and the [NBPD](http://bikepeddocumentation.org/).
 
    1.1 I want to specify an intersection by its cross streets.
