@@ -45,11 +45,11 @@ var counts = [
 		org_id: 'SABA',
 		start: '2015-11-01T18:00:00.000Z',
 		end: '2015-11-01T20:00:00.000Z',
-		name: 'Something and Somewhere',
-		NS_Street: 'Freeport Blvd.',
-		EW_Street: 'Vallejo Way',
-		latitude: 38.5513534,
-		longitude: -121.4889744,
+		name: 'J and 18th',
+		NS_Street: '18th St.',
+		EW_Street: 'J St.',
+		latitude: 38.5771737,
+		longitude: -121.4914471,
 		travelers: [
 			{
 				id: 1,
