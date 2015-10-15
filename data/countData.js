@@ -1,3 +1,5 @@
+var Q = require('Q');
+
 var countData = {};
 
 var counts = [
@@ -79,18 +81,29 @@ var counts = [
 
 countData.get = function (id) {
 	
-	var count = null;
+	var deferred = Q.defer();
 	
-	counts.forEach(function (item) {
+	setTimeout(function () {
 		
-		console.log(counter++);
-		if (item.id === id) {
+		var count = null;
+
+		try {
+			counts.forEach(function (item) {
+
+				if (item.id === id) {
+
+					count = item;
+				}
+			});
 			
-			count = item;
+			deferred.resolve(count);
+		} catch (ex) {
+			deferred.reject(ex);
 		}
-	});
+		
+	}, 100);
 	
-	return count;
-}
+	return deferred.promise;
+};
 
 module.exports = countData;

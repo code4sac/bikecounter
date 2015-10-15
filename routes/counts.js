@@ -6,7 +6,11 @@ var countData = require('../data/countData');
 /* GET users listing. */
 router.get('/:id', function(req, res) {
 	
-	res.send(countData.get(req.params.id));
+	countData.get(req.params.id)
+	.then(function (data) {
+
+		res.send(data);
+	});
 });
 
 module.exports = router;
