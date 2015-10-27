@@ -4,9 +4,14 @@ $(document).ready(function () {
 	var url = 'counts/' + countId;
 	
 	$.get(url)
-		.then(function (data) {
+	.then(function (data) {
 			
 			console.log(data);
 			startUp(data);
-		});
+		}, function (error) {
+		
+			console.log(error);
+			alert(error.responseText);
+		}
+	);
 });

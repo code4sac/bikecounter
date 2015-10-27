@@ -8,8 +8,12 @@ router.get('/:id', function(req, res) {
 	
 	countData.get(req.params.id)
 	.then(function (data) {
-
-		res.send(data);
+		
+		if (data == undefined) {
+			res.status(404).send('No count found that matches supplied count ID.');
+		} else {
+			res.send(data);	
+		}
 	});
 });
 

@@ -80,12 +80,12 @@ var counts = [
 ];
 
 countData.get = function (id) {
-	
+
 	var deferred = Q.defer();
 	
 	setTimeout(function () {
 		
-		var count = null;
+		var count;
 
 		try {
 			counts.forEach(function (item) {
