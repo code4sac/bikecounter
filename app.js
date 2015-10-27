@@ -46,6 +46,7 @@ if (app.get('env') === 'development') {
 				res.status(err.status || 500);
 				
 				if (req.xhr) {
+						res.set("Content-Type", "application/json");
 						res.send(error);
 				} else {
 						res.render('error', error);
@@ -59,6 +60,7 @@ app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 
 		if (req.xhr) {
+				res.set("Content-Type", "application/json");
 				res.send(err.message);
 		} else {
 				res.render('error', {
