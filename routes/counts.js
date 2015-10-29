@@ -17,4 +17,11 @@ router.get('/:id', function(req, res) {
 	});
 });
 
+router.post('/:id', function (req, res) {
+	
+	console.dir(req.body);
+	
+	res.status(201).send("OK!");
+});
+
 module.exports = router;
