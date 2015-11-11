@@ -1,3 +1,4 @@
+
 /*
  An arbitray upper limit to the possible number
 of travelers we would ever display.
@@ -46,9 +47,9 @@ function hasTraveler() {
 		var cnt = $("#Cnt_traveler_" + i).text();
 		if (cnt + 0 > 0){return true;}
 	} // end for
-
+	
 	return false; // no counts
-
+	
 }
 
 function clearLanes() {
@@ -70,55 +71,75 @@ function laneClicked(which){
 	// change the lane color...
 	$("#"+which.id).css('background-color','#3f3');
 	// record the trip...
-
+	
 	// get the locally stored data
 	var data = getData();
-
+	
 	// compile each traveler type count as tab/return delimited text
 	// Arbtrarily limit the number of travelers to check at 10...
+	var tripTime = getTripTime(); // all travelers will have the some timestamp
+	
 	for(var i = 1; i <= howManyTravelers; i++){
 		var cnt = $("#Cnt_traveler_" + i).text();
 		if (cnt + 0 > 0){
-			var y = entryLane + "\t"+ $("#traveler_"+i).attr("name") + "\t"+cnt + "\n";
+			var y = entryLane + "\t"+ cnt + "\t" + tripTime + "\t" + $("#traveler_"+i).attr("name") + "\n";
 			//alert(y);
 			data = data + y;
 		}
 	}
-
-	// saveData writes data to sessionStorage
+	
+	// saveData writes data to localStorage
 	// use webworker to upload data to host when connection is available
 	saveData(data);
 	showData();
-	setTimeout("clearAll()", 500) // feedback delay
+	setTimeout("clearAll()", 250) // feedback delay
 }
 
 // Data Handling...
+/*
+  add document.documentURI to storage item name
+  to segragate data for different URLs. All localStorage
+  data for a domain (www.example.com) is in the same store. 
+*/
+
+// localStorage needs to have a unique name for the storage location
+// This uses the complete URI of the page ie: app.bikeandwalk.org/12345/"
+function getStorageDomain() {return document.documentURI; }
+  
 function saveData(data){
-	if(hasSessionStorage()) {
-		sessionStorage.data = data;
+	if(hasStorage()) {
+		localStorage.setItem(getStorageDomain() + ".data", data);
 	} else {
-		// Sorry! No Web Storage support..
+	    // Sorry! No Web Storage support..
 		uploadData(data);
 	}
 }
 
 function readData(){
-	if(hasSessionStorage()) {
-		return sessionStorage.data;
+	if(hasStorage()) {
+		return localStorage.getItem(getStorageDomain() + ".data");
 	} else {
-		// Sorry! No Web Storage support..
+	    // Sorry! No Web Storage support..
 		return "";
 	}
+}
+
+function clearData() {
+	if(hasStorage()) {
+		localStorage.removeItem(getStorageDomain() + ".data");
+		showData(); // refresh the data list
+	}
+	// else do nothing...
 }
 
 function getData() {
 	// return the current session data
 	var data = "";
-	// try to get it from sessionStorage
+	// try to get it from localStorage
 	data = readData()
 	// if still empty? add the header row
-	if (!data){data = "Lane\tTraveler\tCount\n";} 
-
+	if (!data){data = "Lane\tCount\tTime\tTraveler\n";} 
+	
 	return data;
 }
 
@@ -130,15 +151,16 @@ function showData() {
 }
 
 function showTotal(data) {
+// This is just a kluge. TODO - find a more reliable way to provide the user with feedback on their count total
 	var theTotal = 0;
 	// loop through the lines of data and add to theTotal
 	var countLines = data.split("\n");
 	var searchString = /\t\d/;
 	if(countLines.length > 1){
-		for(var i = 1;i< countLines.length; i++) {
+		for(var i = 1;i< countLines.length - 1; i++) {
 			var pos = countLines[i].search(searchString);
 			if(pos >= 0) {
-				var n = Number(countLines[i].substr(pos+1));
+				var n = Number(countLines[i].substr(pos+1,1));
 				if(n) theTotal = theTotal + n ;
 			}
 		}
@@ -150,41 +172,34 @@ function showTotal(data) {
 	}
 }
 
-function hasSessionStorage() {
-	if(typeof(sessionStorage) !== "undefined") {
-		// Storage is available
+function hasStorage() {
+	if(typeof(localStorage) !== "undefined") {
+	    // Storage is available
 		return true;
 	} else {
-		return false
+	    return false
 	}	
 }
 
 function uploadData() {
 	// just a stub for now
-
+	
 	/* 
-	if sessionStorage and webWorkers are available,
+	if localStorage and webWorkers are available,
 	accumulate the data and upload it at intervals to 
 	reduce network use on client device. Also allows
 	data to be accumulated and uploaded when a connection
 	is available in the case where the user does not
 	have connection in the counting location.
-
+	
 	if storage is not available the data must be uploaded
 	immediately. Alert the user if there is no connection.
 	In that case they won't be able to use the app for counting
 	without a connection.
 	*/
-
+	
 }
 
-function clearData() {
-	if(hasSessionStorage()) {
-		sessionStorage.removeItem("data");
-		showData(); // refresh the data list
-	}
-	// else do nothing...
-}
 
 // End Data handling
 
@@ -208,7 +223,7 @@ function showFormPage(){
 	$("#countContain").hide();
 	$("#infoContain").show();
 	hideMenu();
-
+	
 }
 function submitReport(){
 	alert("Report Submitted!")
@@ -233,3 +248,13 @@ function setModal(objectID,modalState) {
 	}
 }
 
+
+function getTripTime() {
+    var d = new Date();
+    //convert to local time
+    d.setHours(d.getUTCHours() + (d.getTimezoneOffset()/60))
+    var n = d.toISOString();
+    // the string has a trailing 'Z' but is really local time so...
+    n = n.substring(0,n.length-1); // remove the trailing 'Z'
+    return n;
+}
